@@ -5,6 +5,10 @@ const port = 3000;
 // allows access to client folder
 app.use(express.static('client'));
 
+app.post('/upload_json', (req, res) => {
+  res.send('hello');
+});
+
 
 
 //app.get('/', (req, res) => res.send(' World!'));
