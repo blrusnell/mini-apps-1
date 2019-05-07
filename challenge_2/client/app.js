@@ -1,7 +1,15 @@
 
 
 $('#submit').click(function() {
-    let $textarea = $('#textarea').val();
-    let string = JSON.stringify($textarea);
-    console.log(string);
+    let $textareaData = $('#textarea').val();
+    
+    $.ajax({
+        type: "POST",
+        url: "/upload_json",
+        data: $textareaData 
+        // success: success,
+        // dataType: dataType
+      });
+
+
 });
