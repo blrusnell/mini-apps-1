@@ -1,5 +1,7 @@
 
 
 $('#submit').click(function() {
-    alert('hello');
-})
+    let $textarea = $('#textarea').val();
+    let string = JSON.stringify($textarea);
+    console.log(string);
+});
