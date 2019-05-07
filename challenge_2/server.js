@@ -4,8 +4,8 @@ const port = 3000;
 const bodyParser = require('body-parser');
 
 
-app.use(bodyParser());
-// app.use(bodyParser.urlencoded({extended: true}));
+//app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
 
 
 // allows access to client folder
@@ -17,18 +17,31 @@ app.use(express.static('client'));
 
 // recieve post request from client and send parsed data to new page
 app.post('/upload_json', (req, res) => {
-    console.log(req.body);
-    // let csv = csvHandeler(req.body);
-    // console.log(csv);
+    let reportStringToObj = JSON.parse(req.body.data);
+    let csv = csvHandler(reportStringToObj);
+    console.log(csv);
+
     res.send(req.body);
 });
 
 
 
-// change affect post request data
-// const csvHandeler = (obj) => {
-//   return JSON.stringify(obj);
-// };
+
+const csvHandler = (dataObj) => {
+    let string = "";
+    for (let key in dataObj) {
+        if (key !== "children") {
+            string += dataObj[key] + ',';
+        }
+        if (key === "children") {
+            for (let i of dataObj[key]) {
+                string +=  `<br>` + csvHandler(i);
+        }
+    }
+    }
+    return string;
+};
+
 
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
