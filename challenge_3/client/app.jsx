@@ -5,26 +5,53 @@ class App extends React.Component {
 
 
         this.state = {
-            state: null
+            isCheckout: true,
+            isf1form: false,
+            isf2form: false,
+            isf3form: false
         };
+
+        this.firstFormRender = this.firstFormRender.bind(this);
+        this.secondFormRender = this.secondFormRender.bind(this);
+        this.thirdFormRender = this.thirdFormRender.bind(this);
+        
+    }
+
+    firstFormRender (e) {
+        this.setState({
+            isCheckout: false,
+            isf1form: true
+        })
+    }
+
+    secondFormRender() {
+        this.setState({
+            isf1form: false,
+            isf2form: true
+        })
+    }
+
+    thirdFormRender() {
+        this.setState({
+            isf2form: false,
+            isf3form: true
+        })
     }
 
 
     render() {
-        return(
-            <div>
-                <button>Checkout</button>
-                <div>
-                    <F1/>
-                </div>
-                <div>
-                    <F2/>
-                </div>
-                <div>
-                    <F3/>
-                </div>
-            </div>
-        );
+        if (this.state.isCheckout) {
+            return <button onClick={this.firstFormRender}>Checkout</button>
+        } else
+        if (this.state.isf1form) {
+            return <div><F1 secondForm={this.secondFormRender}/></div>
+        } else
+        if (this.state.isf2form) {
+            return <div><F2/></div>
+        } else
+        if (this.state.isf3form) {
+            return <div><F3/></div>
+        }
     }
 }
 
@@ -44,6 +71,7 @@ const F1 = (props) => (
             <input type="text" name="password"/>
             </label>
         </form>
+        <button onClick={props.secondForm}>Next</button>
     </div>
 
 );
@@ -68,6 +96,7 @@ const F2 = (props) => (
          <input type="text" name="zip"/>
          </label>
      </form>
+     <button onClick={props.thirdFormRender}>Next</button>
  </div>
 );
 
