@@ -5,6 +5,7 @@ class App extends React.Component {
 
 
         this.state = {
+            //changing state to change the forms on the page
             isCheckout: true,
             isf1form: false,
             isf2form: false,
@@ -34,29 +35,42 @@ class App extends React.Component {
         this.firstFormRender = this.firstFormRender.bind(this);
         this.secondFormRender = this.secondFormRender.bind(this);
         this.thirdFormRender = this.thirdFormRender.bind(this);
+        this.onChange = this.onChange.bind(this);
         
     }
+
+    onChange(e) {
+        this.setState({
+        [e.target.name]: e.target.value
+        });
+    }
+        
 
     firstFormRender (e) {
         this.setState({
             isCheckout: false,
-            isf1form: true
+            isf1form: true,
+        
         })
     }
 
-    secondFormRender() {
+    secondFormRender(event) {
+        console.log(this.state.name)
         this.setState({
             isf1form: false,
-            isf2form: true
+            isf2form: true,
+            //name: event.target.value
         })
     }
 
     thirdFormRender() {
+        console.log(this.state.name)
         this.setState({
             isf2form: false,
-            isf3form: true
+            isf3form: true,
         })
     }
+
 
     confirmationRender() {
         this.setState({
@@ -71,10 +85,10 @@ class App extends React.Component {
             return <button onClick={this.firstFormRender}>Checkout</button>
         } else
         if (this.state.isf1form) {
-            return <div><F1 secondForm={this.secondFormRender}/></div>
+            return <div><F1 secondForm={this.secondFormRender} change={this.onChange}/></div>
         } else
         if (this.state.isf2form) {
-            return <div><F2 thirdForm={this.thirdFormRender}/></div>
+            return <div><F2 thirdForm={this.thirdFormRender} /></div>
         } else
         if (this.state.isf3form) {
             return <div><F3 confirmRender={this.confirmationRender}/></div>
@@ -87,7 +101,7 @@ const F1 = (props) => (
        <form>
             <label>
             Name:
-            <input type="text" name="name"/>
+            <input type="text" name="name" onChange={(e) => props.change(e)} />
             </label>
             <label>
             Email:
@@ -108,7 +122,7 @@ const F2 = (props) => (
     <form>
          <label>
          Shipping Address:
-         <input type="text" name="address"/>
+         <input type="text" name="address" value={props.name}/>
          </label>
          <label>
          City:
@@ -120,7 +134,7 @@ const F2 = (props) => (
          </label>
          <label>
          Zip Code:
-         <input type="text" name="zip"/>
+         <input type="text" name="zip" />
          </label>
      </form>
      <button onClick={props.thirdForm}>Next</button>
@@ -144,7 +158,7 @@ const F3 = (props) => (
          </label>
          <label>
          Zip Code:
-         <input type="text" name="zip"/>
+         <input type="text" name="zip" />
          </label>
      </form>
  </div>
