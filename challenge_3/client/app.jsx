@@ -15,14 +15,20 @@ class App extends React.Component {
             <div>
                 <button>Checkout</button>
                 <div>
-                    <FormOne/>
+                    <F1/>
+                </div>
+                <div>
+                    <F2/>
+                </div>
+                <div>
+                    <F3/>
                 </div>
             </div>
         );
     }
 }
 
-const FormOne = (props) => (
+const F1 = (props) => (
     <div className="userInfo">
        <form>
             <label>
@@ -42,13 +48,51 @@ const FormOne = (props) => (
 
 );
 
-const f2 = (props) => {
-    
-};
+const F2 = (props) => (
+    <div className="shippingInfo">
+    <form>
+         <label>
+         Shipping Address:
+         <input type="text" name="address"/>
+         </label>
+         <label>
+         City:
+         <input type="text" name="city"/>
+         </label>
+         <label>
+         State:
+         <input type="text" name="state"/>
+         </label>
+         <label>
+         Zip Code:
+         <input type="text" name="zip"/>
+         </label>
+     </form>
+ </div>
+);
 
-const f3 = (props) => {
-    
-};
+const F3 = (props) => (
+    <div className="cardInfo">
+    <form>
+         <label>
+         Credit Card Number:
+         <input type="text" name="cardNumber"/>
+         </label>
+         <label>
+         Expiration Date:
+         <input type="text" name="expiry"/>
+         </label>
+         <label>
+         CVV:
+         <input type="text" name="cvv"/>
+         </label>
+         <label>
+         Zip Code:
+         <input type="text" name="zip"/>
+         </label>
+     </form>
+ </div>
+);
 
 
 ReactDOM.render(<App /> , document.getElementById('app'));
