@@ -8,7 +8,27 @@ class App extends React.Component {
             isCheckout: true,
             isf1form: false,
             isf2form: false,
-            isf3form: false
+            isf3form: false,
+            isConfirmation: false,
+            
+            //form 1 input state
+            name: '',
+            email: '',
+            password: '',
+            
+            //form 2 input state
+            shippingAddress: '',
+            city: '',
+            shipState: '',
+            zip: '',
+
+            //form 3 input state
+            ccNumber: '',
+            expiryDate: '',
+            cvv: '',
+            ccZip: ''
+
+            
         };
 
         this.firstFormRender = this.firstFormRender.bind(this);
@@ -38,6 +58,13 @@ class App extends React.Component {
         })
     }
 
+    confirmationRender() {
+        this.setState({
+            isf3form: false,
+            isConfirmation: true
+        })
+    }
+
 
     render() {
         if (this.state.isCheckout) {
@@ -47,10 +74,10 @@ class App extends React.Component {
             return <div><F1 secondForm={this.secondFormRender}/></div>
         } else
         if (this.state.isf2form) {
-            return <div><F2/></div>
+            return <div><F2 thirdForm={this.thirdFormRender}/></div>
         } else
         if (this.state.isf3form) {
-            return <div><F3/></div>
+            return <div><F3 confirmRender={this.confirmationRender}/></div>
         }
     }
 }
@@ -96,7 +123,7 @@ const F2 = (props) => (
          <input type="text" name="zip"/>
          </label>
      </form>
-     <button onClick={props.thirdFormRender}>Next</button>
+     <button onClick={props.thirdForm}>Next</button>
  </div>
 );
 
@@ -122,6 +149,13 @@ const F3 = (props) => (
      </form>
  </div>
 );
+
+const Confirmation = (props) => (
+    <div className="confirmationInfo">
+    
+    </div>
+);
+
 
 
 ReactDOM.render(<App /> , document.getElementById('app'));
