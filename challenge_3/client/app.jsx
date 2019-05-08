@@ -1,22 +1,57 @@
-import React from "react";
-import ReactDOM from "react-dom";
-
 
 class App extends React.Component {
     constructor(props) {
         super(props);
+
+
+        this.state = {
+            state: null
+        };
     }
 
 
     render() {
         return(
-            <div></div>
+            <div>
+                <button>Checkout</button>
+                <div>
+                    <FormOne/>
+                </div>
+            </div>
         );
     }
 }
 
-export default App;
+const FormOne = (props) => (
+    <div className="userInfo">
+       <form>
+            <label>
+            Name:
+            <input type="text" name="name"/>
+            </label>
+            <label>
+            Email:
+            <input type="text" name="email"/>
+            </label>
+            <label>
+            Password:
+            <input type="text" name="password"/>
+            </label>
+        </form>
+    </div>
+
+);
+
+const f2 = (props) => {
+    
+};
+
+const f3 = (props) => {
+    
+};
 
 
-ReactDOM.render('<App />' , document.getElementById('app'));
+ReactDOM.render(<App /> , document.getElementById('app'));
+
+
   
