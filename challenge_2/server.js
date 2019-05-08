@@ -21,7 +21,7 @@ app.post('/upload_json', (req, res) => {
     let csv = csvHandler(reportStringToObj);
     console.log(csv);
 
-    res.send(req.body);
+    res.send(csv);
 });
 
 
