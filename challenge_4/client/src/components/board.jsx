@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-const Square = (props) => (
+const Board = (props) => (
     <div>
-        
+      {props.board}
     </div>
 )
 
-export default Square;  
+export default Board;  
