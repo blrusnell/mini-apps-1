@@ -96,6 +96,14 @@ class App extends React.Component {
             cvv: '',
             cczip: ''
         })
+
+        axios.post('/', this.state)
+          .then(function (response) {
+            console.log(response);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
     }
 
 
