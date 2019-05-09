@@ -97,6 +97,7 @@ class App extends React.Component {
             cczip: ''
         })
 
+        //make post request
         axios.post('/', this.state)
           .then(function (response) {
             console.log(response);
