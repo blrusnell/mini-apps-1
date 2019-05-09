@@ -17,16 +17,16 @@ class App extends React.Component {
             password: '',
             
             //form 2 input state
-            shippingAddress: '',
+            address: '',
             city: '',
-            shipState: '',
+            state: '',
             zip: '',
 
             //form 3 input state
-            ccNumber: '',
-            expiryDate: '',
+            cardNumber: '',
+            expiry: '',
             cvv: '',
-            ccZip: ''
+            cczip: ''
 
             
         };
@@ -40,6 +40,7 @@ class App extends React.Component {
         
     }
 
+    //handles input change in forms
     onChange(e) {
         this.setState({
         [e.target.name]: e.target.value
@@ -47,7 +48,7 @@ class App extends React.Component {
     }
         
 
-    firstFormRender (e) {
+    firstFormRender () {
         this.setState({
             isCheckout: false,
             isf1form: true,
@@ -55,12 +56,10 @@ class App extends React.Component {
         })
     }
 
-    secondFormRender(event) {
-        console.log(this.state.name)
+    secondFormRender() {
         this.setState({
             isf1form: false,
             isf2form: true,
-            //name: event.target.value
         })
     }
 
@@ -82,7 +81,20 @@ class App extends React.Component {
     purchaseRender() {
         this.setState({
             isConfirmation: false,
-            isCheckout: true
+            isCheckout: true,
+
+            //reset state
+            name: '',
+            email: '',
+            password: '',
+            address: '',
+            city: '',
+            state: '',
+            zip: '',
+            cardNumber: '',
+            expiry: '',
+            cvv: '',
+            cczip: ''
         })
     }
 
@@ -95,10 +107,10 @@ class App extends React.Component {
             return <div><F1 secondForm={this.secondFormRender} change={this.onChange}/></div>
         } else
         if (this.state.isf2form) {
-            return <div><F2 thirdForm={this.thirdFormRender} /></div>
+            return <div><F2 thirdForm={this.thirdFormRender} change={this.onChange}/></div>
         } else
         if (this.state.isf3form) {
-            return <div><F3 confirmRender={this.confirmationRender}/></div>
+            return <div><F3 confirmRender={this.confirmationRender} change={this.onChange}/></div>
         }
         if (this.state.isConfirmation) {
             return <div><Confirmation purchaseRender={this.purchaseRender}/></div>
@@ -106,6 +118,7 @@ class App extends React.Component {
     }
 }
 
+//form 1 component
 const F1 = (props) => (
     <div className="userInfo">
        <form>
@@ -127,6 +140,7 @@ const F1 = (props) => (
 
 );
 
+//form 2 component
 const F2 = (props) => (
     <div className="shippingInfo">
     <form>
@@ -151,6 +165,7 @@ const F2 = (props) => (
  </div>
 );
 
+//form 3 component
 const F3 = (props) => (
     <div className="cardInfo">
     <form>
@@ -168,13 +183,15 @@ const F3 = (props) => (
          </label>
          <label>
          Zip Code:
-         <input type="text" name="zip" onChange={(e) => props.change(e)} />
+         <input type="text" name="cczip" onChange={(e) => props.change(e)} />
          </label>
      </form>
      <button onClick={props.confirmRender}>Confirm</button>
  </div>
 );
 
+
+//confirmation page 
 const Confirmation = (props) => (
     <div className="confirmationInfo">
         <button onClick={props.purchaseRender}>Purchase</button>
