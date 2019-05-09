@@ -1,4 +1,3 @@
-
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -10,13 +9,33 @@ class App extends React.Component {
             isf1form: false,
             isf2form: false,
             isf3form: false,
-            isConfirmation: false
+            isConfirmation: false,
+            
+            //form 1 input state
+            name: '',
+            email: '',
+            password: '',
+            
+            //form 2 input state
+            shippingAddress: '',
+            city: '',
+            shipState: '',
+            zip: '',
+
+            //form 3 input state
+            ccNumber: '',
+            expiryDate: '',
+            cvv: '',
+            ccZip: ''
+
             
         };
 
         this.firstFormRender = this.firstFormRender.bind(this);
         this.secondFormRender = this.secondFormRender.bind(this);
         this.thirdFormRender = this.thirdFormRender.bind(this);
+        this.confirmationRender = this.confirmationRender.bind(this);
+        this.purchaseRender = this.purchaseRender.bind(this);
         this.onChange = this.onChange.bind(this);
         
     }
@@ -46,7 +65,6 @@ class App extends React.Component {
     }
 
     thirdFormRender() {
-        console.log(this.state.name)
         this.setState({
             isf2form: false,
             isf3form: true,
@@ -64,21 +82,8 @@ class App extends React.Component {
     purchaseRender() {
         this.setState({
             isConfirmation: false,
-            isCheckout: true,
-
-            name: '',
-            email: '',
-            password: '',
-            address: '',
-            city: '',
-            state: '',
-            zip: '',
-            cardNumber: '',
-            expiry: '',
-            cvv: '',
-            zipCode: '',
-
-        });
+            isCheckout: true
+        })
     }
 
 
@@ -90,13 +95,13 @@ class App extends React.Component {
             return <div><F1 secondForm={this.secondFormRender} change={this.onChange}/></div>
         } else
         if (this.state.isf2form) {
-            return <div><F2 thirdForm={this.thirdFormRender} change={this.onChange}/></div>
+            return <div><F2 thirdForm={this.thirdFormRender} /></div>
         } else
         if (this.state.isf3form) {
-            return <div><F3 confirmRender={this.confirmationRender} change={this.onChange}/></div>
+            return <div><F3 confirmRender={this.confirmationRender}/></div>
         }
         if (this.state.isConfirmation) {
-            return <div><F3 confirmRender={this.confirmationRender} change={this.onChange}/></div>
+            return <div><Confirmation purchaseRender={this.purchaseRender}/></div>
         }
     }
 }
@@ -110,11 +115,11 @@ const F1 = (props) => (
             </label>
             <label>
             Email:
-            <input type="text" name="email" onChange={(e) => props.change(e)}/>
+            <input type="text" name="email" onChange={(e) => props.change(e)} />
             </label>
             <label>
             Password:
-            <input type="text" name="password" onChange={(e) => props.change(e)}/>
+            <input type="text" name="password" onChange={(e) => props.change(e)} />
             </label>
         </form>
         <button onClick={props.secondForm}>Next</button>
@@ -127,19 +132,19 @@ const F2 = (props) => (
     <form>
          <label>
          Shipping Address:
-         <input type="text" name="address" onChange={(e) => props.change(e)}/>
+         <input type="text" name="address" onChange={(e) => props.change(e)} />
          </label>
          <label>
          City:
-         <input type="text" name="city" onChange={(e) => props.change(e)}/>
+         <input type="text" name="city" onChange={(e) => props.change(e)} />
          </label>
          <label>
          State:
-         <input type="text" name="state" onChange={(e) => props.change(e)}/>
+         <input type="text" name="state" onChange={(e) => props.change(e)} />
          </label>
          <label>
          Zip Code:
-         <input type="text" name="zip" onChange={(e) => props.change(e)}/>
+         <input type="text" name="zip" onChange={(e) => props.change(e)} />
          </label>
      </form>
      <button onClick={props.thirdForm}>Next</button>
@@ -151,33 +156,31 @@ const F3 = (props) => (
     <form>
          <label>
          Credit Card Number:
-         <input type="text" name="cardNumber" onChange={(e) => props.change(e)}/>
+         <input type="text" name="cardNumber" onChange={(e) => props.change(e)} />
          </label>
          <label>
          Expiration Date:
-         <input type="text" name="expiry" onChange={(e) => props.change(e)}/>
+         <input type="text" name="expiry" onChange={(e) => props.change(e)} />
          </label>
          <label>
          CVV:
-         <input type="text" name="cvv" onChange={(e) => props.change(e)}/>
+         <input type="text" name="cvv" onChange={(e) => props.change(e)} />
          </label>
          <label>
          Zip Code:
-         <input type="text" name="zipCode" onChange={(e) => props.change(e)}/>
+         <input type="text" name="zip" onChange={(e) => props.change(e)} />
          </label>
      </form>
+     <button onClick={props.confirmRender}>Confirm</button>
  </div>
 );
 
 const Confirmation = (props) => (
     <div className="confirmationInfo">
-    <button>Purchse</button>
+        <button onClick={props.purchaseRender}>Purchase</button>
     </div>
 );
 
 
 
 ReactDOM.render(<App /> , document.getElementById('app'));
-
-
-  
