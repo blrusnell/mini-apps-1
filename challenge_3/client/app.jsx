@@ -210,5 +210,3 @@ const Confirmation = (props) => (
 
 
 ReactDOM.render(<App /> , document.getElementById('app'));
-
-//
